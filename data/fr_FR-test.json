@@ -1,0 +1,201 @@
+{
+   "average-bleu": 0.16885475909076889,
+   "report": {
+      "Who are the main characters in the movie Little Women?": {
+         "translation": [
+            "Who are the main characters in the movie Little Women?"
+         ],
+         "targets": [
+            "Qui sont les personnages principaux du film Les Quatre Filles du docteur March?",
+            "Qui sont les personnages principaux du film Les Quatre Filles du docteur March??"
+         ],
+         "score": 0
+      },
+      "Who are the main actors in the movie Miracle in Cell No. 7?": {
+         "translation": [
+            "Qui sont les principaux acteurs du film Miracle in Cell No. 7 ?"
+         ],
+         "targets": [
+            "Qui sont les acteurs principaux du film 7. Ko\u011fu\u015ftaki Mucize?"
+         ],
+         "score": 4.0622028886850106e-78
+      },
+      "How can Welsh onions be grown and harvested in home gardens?": {
+         "translation": [
+            "Comment peut-on culturer et r\u00e9colter des oignons gallois dans les jardins domestiques?"
+         ],
+         "targets": [
+            "Comment la ciboule peut-elle \u00eatre cultiv\u00e9 et r\u00e9colt\u00e9 dans son jardin?",
+            "Comment peut-on cultiver et r\u00e9colter la ciboule dans son potager?",
+            "Comment peut-on cultiver et r\u00e9colter de la ciboule dans son jardin?"
+         ],
+         "score": 7.825799788115097e-155
+      },
+      "What is the genre of A City of Sadness?": {
+         "translation": [
+            "Quel est le genre d'A City of Sadness?"
+         ],
+         "targets": [
+            "\u00c0 quel genre appartient La Cit\u00e9 des douleurs?",
+            "Quel est le genre du film La Cit\u00e9 des douleurs?",
+            "Quel est le genre de La Cit\u00e9 des douleurs?"
+         ],
+         "score": 0.345720784641941
+      },
+      "How would you describe The Princess and the Pea in one word?": {
+         "translation": [
+            "Comment d\u00e9cririez-vous la princesse et le pois en un mot?"
+         ],
+         "targets": [
+            "Comment peut-on d\u00e9crire La Princesse au petit pois en un seul mot?",
+            "Comment d\u00e9cririez-vous La Princesse au petit pois en un seul mot?",
+            "Comment d\u00e9cririez-vous La Princesse au petit pois en un mot?"
+         ],
+         "score": 0.31239399369202553
+      },
+      "What type of hill is Batu Caves made of?": {
+         "translation": [
+            "De quel type de colline sont constitu\u00e9es les Grottes de Batu?"
+         ],
+         "targets": [
+            "De quel type de colline les grottes de Batu sont-elles constitu\u00e9es?"
+         ],
+         "score": 0.38163309113713373
+      },
+      "Where can you watch the TV series The Santa Clauses?": {
+         "translation": [
+            "O\u00f9 pouvez-vous regarder la s\u00e9rie de t\u00e9l\u00e9vision The Santa Clauses ?"
+         ],
+         "targets": [
+            "O\u00f9 pouvez-vous regarder la s\u00e9rie t\u00e9l\u00e9vis\u00e9e Super No\u00ebl, la s\u00e9rie?",
+            "O\u00f9 regarder la s\u00e9rie t\u00e9l\u00e9vis\u00e9e Super No\u00ebl, la s\u00e9rie?"
+         ],
+         "score": 0.3508439695638686
+      },
+      "Is the St Matthew Passion a sacred oratorio?": {
+         "translation": [
+            "La Passion Sainte Matthew est-elle un oratoire sacr\u00e9?"
+         ],
+         "targets": [
+            "La Passion selon Saint Matthieu est-elle un oratorio sacr\u00e9?"
+         ],
+         "score": 8.557332335294228e-155
+      },
+      "What was the premise of the TV series Family Matters?": {
+         "translation": [
+            "Quelle \u00e9tait la pr\u00e9somption de la s\u00e9rie TV Family Matters?"
+         ],
+         "targets": [
+            "Quelle \u00e9tait la pr\u00e9misse de la s\u00e9rie La Vie de famille?",
+            "De quelle s\u00e9rie La Vie de famille \u00e9tait-elle d\u00e9riv\u00e9e?",
+            "Quels \u00e9taient les pr\u00e9mices de la s\u00e9rie t\u00e9l\u00e9vis\u00e9e La Vie de famille?"
+         ],
+         "score": 6.206021746903507e-78
+      },
+      "What instrument is the suite Pictures at an Exhibition written for?": {
+         "translation": [
+            "Pour quel instrument est \u00e9crit la suite Pictures at an Exhibition?"
+         ],
+         "targets": [
+            "Pour quels instruments la suite Tableaux d'une exposition a-t-elle \u00e9t\u00e9 \u00e9crite?",
+            "Pour quel instrument la suite Tableaux d'une exposition est-elle \u00e9crite?"
+         ],
+         "score": 4.284993070788676e-78
+      },
+      "What is the genre of Gulliver's Travels?": {
+         "translation": [
+            "Quel genre est Gulliver's Travels ?"
+         ],
+         "targets": [
+            "Quel est le genre du roman Les Voyages de Gulliver?",
+            "Quel est le genre du livre Les Voyages de Gulliver?",
+            "\u00c0 quel genre litt\u00e9raire Les Voyages de Gulliver appartiennent-ils?"
+         ],
+         "score": 9.291879812217675e-232
+      },
+      "Which famous catchphrase is associated with the Simpson family?": {
+         "translation": [
+            "Quelle phrase c\u00e9l\u00e8bre est associ\u00e9e \u00e0 la famille Simpson?"
+         ],
+         "targets": [
+            "Quel slogan c\u00e9l\u00e8bre est associ\u00e9 \u00e0 la Famille Simpson?",
+            "Quel slogan c\u00e9l\u00e8bre est associ\u00e9 \u00e0 la famille Simpson?"
+         ],
+         "score": 0.3549481056010053
+      },
+      "According to the Rabbins, what could Solomon learn from the Seal of Solomon?": {
+         "translation": [
+            "Selon les rabbins, ce que pouvait Solomon apprendre du sceau de Solomon?"
+         ],
+         "targets": [
+            "Selon les rabbins quel pouvoir le Sceau de Salomon pouvait-il lui conf\u00e9rer?",
+            "Selon les rabbins, que pouvait apprendre Salomon du Sceau de Salomon?"
+         ],
+         "score": 4.484824319939061e-78
+      },
+      "How tall is the Ostankino Tower in Moscow?": {
+         "translation": [
+            "Quelle est la hauteur de la tour Ostankino \u00e0 Moscou?"
+         ],
+         "targets": [
+            "Quelle est la hauteur de la tour Ostankino \u00e0 Moscou?"
+         ],
+         "score": 1.0
+      },
+      "Can you provide a brief summary of the movie The Mask of Zorro?": {
+         "translation": [
+            "Pouvez-vous fournir un bref r\u00e9sum\u00e9 du film La masque de Zorro?"
+         ],
+         "targets": [
+            "Pouvez-vous donner un court r\u00e9sum\u00e9 du film Le Masque de Zorro?",
+            "Pouvez-vous fournir un bref r\u00e9sum\u00e9 du film Le Masque de Zorro?"
+         ],
+         "score": 0.6315552371794037
+      },
+      "In which country did the events of Planet of the Apes take place?": {
+         "translation": [
+            "Dans quel pays ont-ils eu lieu les \u00e9v\u00e9nements du Planete des Apes?"
+         ],
+         "targets": [
+            "Dans quel pays les \u00e9v\u00e9nements de La Plan\u00e8te des singes ont-ils eu lieu?"
+         ],
+         "score": 4.433930820149574e-78
+      },
+      "Where is Viktor Yushchenko from?": {
+         "translation": [
+            "D'o\u00f9 vient Viktor Yushchenko?"
+         ],
+         "targets": [
+            "D'o\u00f9 vient Viktor Iouchtchenko?"
+         ],
+         "score": 8.636168555094496e-78
+      },
+      "What genre does The Invisible Man belong to?": {
+         "translation": [
+            "Quel genre appartient-il \u00e0 The Invisible Man ?"
+         ],
+         "targets": [
+            "\u00c0 quel genre appartient L'Homme invisible?"
+         ],
+         "score": 1.0832677820940877e-231
+      },
+      "Who eventually ended up with the Apple of Discord and why?": {
+         "translation": [
+            "Qui a finalement obtenu l'Apple of Discord et pourquoi?"
+         ],
+         "targets": [
+            "Qui s'est finalement retrouv\u00e9 avec la pomme d'or de la discorde et pourquoi?"
+         ],
+         "score": 4.643380996943939e-155
+      },
+      "Who is Mary, Princess Royal and Countess of Harewood?": {
+         "translation": [
+            "Qui est Mary, princesse royale et comtesse de Harewood?"
+         ],
+         "targets": [
+            "Qui est Mary du Royaume-Uni?"
+         ],
+         "score": 6.08970970641905e-155
+      }
+   }
+}

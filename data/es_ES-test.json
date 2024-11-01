@@ -1,0 +1,205 @@
+{
+   "average-bleu": 0.3435700878107963,
+   "report": {
+      "Who choreographed the original 1910 ballet of The Firebird?": {
+         "translation": [
+            "\u00bfQui\u00e9n core\u00f3graf\u00f3 el ballet original del 1910 de The Firebird?"
+         ],
+         "targets": [
+            "\u00bfQui\u00e9n coreografi\u00f3 el ballet original de 1910 de El p\u00e1jaro de fuego?",
+            "\u00bfQui\u00e9n fue el core\u00f3grafo original del ballet El p\u00e1jaro de fuego?",
+            "\u00bfQui\u00e9n coreografi\u00f3 el ballet original de 1910 El p\u00e1jaro de fuego?"
+         ],
+         "score": 4.907530906758669e-78
+      },
+      "How many people can the Prophet's Mosque accommodate?": {
+         "translation": [
+            "\u00bfCu\u00e1ntas personas pueden alojarse en la Mezquita del Profeta?"
+         ],
+         "targets": [
+            "\u00bfA cu\u00e1ntas personas puede acomodar la Mezquita del Profeta?"
+         ],
+         "score": 0.3155984539112945
+      },
+      "In which country did the events of Planet of the Apes take place?": {
+         "translation": [
+            "\u00bfEn qu\u00e9 pa\u00eds se produjeron los sucesos del Planeta de los Apes?"
+         ],
+         "targets": [
+            "\u00bfEn qu\u00e9 pa\u00eds se llevaron a cabo los eventos de El Planeta de los Simios?",
+            "\u00bfEn qu\u00e9 pa\u00eds se llevaron a cabo los eventos del El planeta de los simios?"
+         ],
+         "score": 0.2542761993800977
+      },
+      "Can you sing the chorus of the folk song Ring a Ring o' Roses?": {
+         "translation": [
+            "\u00bfPuede usted cantar el coro de la canci\u00f3n folk Ring a Ring o' Roses?"
+         ],
+         "targets": [
+            "\u00bfPodr\u00edas cantar el coro de la canci\u00f3n tradicional el corro de la patata?",
+            "\u00bfPuedes cantar el coro de la canci\u00f3n folcl\u00f3rica El corro de la patata?"
+         ],
+         "score": 0.3498761149110956
+      },
+      "What is the genre of The War of the Worlds?": {
+         "translation": [
+            "\u00bfCu\u00e1l es el g\u00e9nero de la Guerra de los Mundos?"
+         ],
+         "targets": [
+            "\u00bfCual es el g\u00e9nero del libro La guerra de los mundos?",
+            "\u00bfCu\u00e1l es el g\u00e9nero de La guerra de los mundos?",
+            "\u00bfA qu\u00e9 g\u00e9nero pertenece La guerra de los mundos?"
+         ],
+         "score": 0.4518010018049224
+      },
+      "What architectural style is the Umayyad Mosque known for?": {
+         "translation": [
+            "\u00bfPara qu\u00e9 estilo arquitect\u00f3nico es conocida la mezquita Umayyad?"
+         ],
+         "targets": [
+            "\u00bfPor qu\u00e9 estilo arquitect\u00f3nico es conocida la Mezquita de los Omeyas?",
+            "\u00bfPor cu\u00e1l estilo arquitect\u00f3nico es conocida la Mezquita de los Omeyas?"
+         ],
+         "score": 0.4703490742954983
+      },
+      "Where can you watch the TV series The Santa Clauses?": {
+         "translation": [
+            "\u00bfD\u00f3nde puedes ver la serie televisiva Santa Clauses?"
+         ],
+         "targets": [
+            "\u00bfD\u00f3nde puedes ver la serie de televisi\u00f3n \u00a1Vaya familia Claus!?",
+            "\u00bfD\u00f3nde puedes ver la serie de televisi\u00f3n \u00a1Vaya Familia Claus!?"
+         ],
+         "score": 0.4026190971287384
+      },
+      "What type of hill is Batu Caves made of?": {
+         "translation": [
+            "\u00bfDe qu\u00e9 tipo de colina est\u00e1n hechas las cavernas de Batu?"
+         ],
+         "targets": [
+            "\u00bfDe qu\u00e9 tipo de colina est\u00e1n hechas las Cuevas de Batu?"
+         ],
+         "score": 0.7419446627365011
+      },
+      "What does the Prophecy of the Popes supposedly predict?": {
+         "translation": [
+            "\u00bfQu\u00e9 prev\u00e9 la profec\u00eda de los Papas?"
+         ],
+         "targets": [
+            "\u00bfQu\u00e9 predice supuestamente la Profec\u00eda de los papas?",
+            "\u00bfQu\u00e9 supuestamente predice la Profec\u00eda de los Papas?"
+         ],
+         "score": 4.945830350570697e-78
+      },
+      "Who are the main antagonistic forces in the World of Ice and Fire?": {
+         "translation": [
+            "\u00bfQui\u00e9nes son las principales fuerzas antagonistas en el mundo del hielo y el fuego?"
+         ],
+         "targets": [
+            "\u00bfQui\u00e9nes son las principales fuerzas antag\u00f3nicas en el universo de Canci\u00f3n de hielo y fuego?",
+            "\u00bfQui\u00e9nes son las principales fuerzas antag\u00f3nicas en el Universo de Cancion de hielo y fuego?"
+         ],
+         "score": 0.3257566281011688
+      },
+      "What is the genre of A City of Sadness?": {
+         "translation": [
+            "\u00bfCu\u00e1l es el g\u00e9nero de A City of Sadness?"
+         ],
+         "targets": [
+            "\u00bfCu\u00e1l es el g\u00e9nero de Ciudad doliente?"
+         ],
+         "score": 0.44632361378533286
+      },
+      "What is the genre of Gulliver's Travels?": {
+         "translation": [
+            "\u00bfCu\u00e1l es el g\u00e9nero de Gulliver's Travels?"
+         ],
+         "targets": [
+            "\u00bfCu\u00e1l es el g\u00e9nero de Los viajes de Gulliver?",
+            "\u00bfCual es el genero de los viajes de Gulliver?"
+         ],
+         "score": 0.46199933699457096
+      },
+      "Who was the main cast of The Pillars of the Earth?": {
+         "translation": [
+            "\u00bfQui\u00e9n fue el cast principal de los pilares de la Tierra?"
+         ],
+         "targets": [
+            "\u00bfCu\u00e1l fue el elenco principal de Los pilares de la Tierra?",
+            "\u00bfCu\u00e1l fue el reparto principal de Los pilares de la Tierra?",
+            "\u00bfCu\u00e1l fue el elenco principal de la serie Los pilares de la Tierra?"
+         ],
+         "score": 0.31702331385234306
+      },
+      "What genre does The Invisible Man belong to?": {
+         "translation": [
+            "\u00bfA qu\u00e9 g\u00e9nero pertenece el hombre invisible?"
+         ],
+         "targets": [
+            "\u00bfA qu\u00e8 g\u00e8nero es la pelicula El hombre invisible?",
+            "\u00bfA qu\u00e9 g\u00e9nero pertenece El hombre invisible?"
+         ],
+         "score": 0.488923022434901
+      },
+      "What was the original purpose of the Cathedral of Christ the Saviour?": {
+         "translation": [
+            "\u00bfCu\u00e1l era el prop\u00f3sito original de la Catedral de Cristo el Salvador?"
+         ],
+         "targets": [
+            "\u00bfCu\u00e1l fue el prop\u00f3sito inicial de la Catedral de Cristo Salvador de Mosc\u00fa?",
+            "\u00bfCu\u00e1l era el prop\u00f3sito original de la Catedral de Cristo Salvador de Mosc\u00fa?"
+         ],
+         "score": 0.7425271143743541
+      },
+      "How do you eat a flat peach?": {
+         "translation": [
+            "\u00bfC\u00f3mo comer una persiana plana?"
+         ],
+         "targets": [
+            "\u00bfC\u00f3mo se come un paraguayo?"
+         ],
+         "score": 1.2183324802375697e-231
+      },
+      "How would you describe The Princess and the Pea in one word?": {
+         "translation": [
+            "\u00bfC\u00f3mo podr\u00eda usted describir la Princesa y el Acero en una sola palabra?"
+         ],
+         "targets": [
+            "\u00bfC\u00f3mo describir\u00edas La princesa y el guisante en una palabra?"
+         ],
+         "score": 7.855726910762709e-155
+      },
+      "What is the historical significance of the Jer\u00f3nimos Monastery?": {
+         "translation": [
+            "\u00bfCu\u00e1l es la importancia hist\u00f3rica del Monasterio de Jer\u00f3nimos?"
+         ],
+         "targets": [
+            "\u00bfCu\u00e1l es el significado hist\u00f3rico del Monasterio de los Jer\u00f3nimos de Santa Mar\u00eda de Bel\u00e9m?",
+            "\u00bfCu\u00e1l es el significado hist\u00f3rico del Monasterio de los Jer\u00f3nimos?",
+            "\u00bfCu\u00e1l es el la importancia hist\u00f3rica del Monasterio de los Jer\u00f3nimos de Bel\u00e9m?"
+         ],
+         "score": 0.6088262405071142
+      },
+      "What is the significance of the Basilica of Our Lady of Guadalupe in Mexican culture?": {
+         "translation": [
+            "\u00bfCu\u00e1l es la importancia de la Bas\u00edlica de Nuestra Se\u00f1ora de Guadalupe en la cultura mexicana?"
+         ],
+         "targets": [
+            "\u00bfCu\u00e1l es el significado de la Bas\u00edlica de Santa Mar\u00eda de Guadalupe en la cultura mexicana?",
+            "\u00bfQu\u00e9 significado tiene la Bas\u00edlica de Santa Mar\u00eda de Guadalupe en la cultura mexicana?"
+         ],
+         "score": 0.4935578819979932
+      },
+      "Who is Mary, Princess Royal and Countess of Harewood?": {
+         "translation": [
+            "\u00bfQui\u00e9n es Mary, Princesa Real y Comandante de Harewood?"
+         ],
+         "targets": [
+            "\u00bfQui\u00e9n es Mar\u00eda del Reino Unido?",
+            "\u00bfQui\u00e9n es Mar\u00eda, Princesa Real y Condesa de Harewood?",
+            "\u00bfQuien es Maria de Windsor?"
+         ],
+         "score": 5.929498746342409e-78
+      }
+   }
+}

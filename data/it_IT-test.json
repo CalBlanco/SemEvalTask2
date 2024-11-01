@@ -1,0 +1,202 @@
+{
+   "average-bleu": 0.4541215423467122,
+   "report": {
+      "How is Yu the Great remembered and honored in Chinese history and culture today?": {
+         "translation": [
+            "Come \u00e8 ricordato e onorato Yu il Grande nella storia e nella cultura cinesi oggi?"
+         ],
+         "targets": [
+            "Come viene ricordato e onorato attualmente Yu il Grande nella storia e nella cultura cinese?",
+            "Come viene ricordato e onorato Yu il Grande nella storia e nella cultura cinese oggi?"
+         ],
+         "score": 0.7311104457090247
+      },
+      "What type of hill is Batu Caves made of?": {
+         "translation": [
+            "Di che tipo di collina sono fatte le caverne di Batu?"
+         ],
+         "targets": [
+            "Di che materiale \u00e8 fatta la collina delle Grotte di Batu?",
+            "Di che materiale sono fatte le grotte di Batu?",
+            "Di che tipo di collina sono fatte le grotte di Batu?"
+         ],
+         "score": 0.7419446627365011
+      },
+      "Who are the main antagonistic forces in the World of Ice and Fire?": {
+         "translation": [
+            "Chi sono le principali forze antagoniste nel mondo del ghiaccio e del fuoco?"
+         ],
+         "targets": [
+            "Chi sono le principali forze antagoniste nel mondo delle Cronache del ghiaccio e del fuoco?"
+         ],
+         "score": 0.729836014355472
+      },
+      "What is the main theme of The Lion in Winter?": {
+         "translation": [
+            "Qual \u00e8 il tema principale del Lion in Winter?"
+         ],
+         "targets": [
+            "Qual \u00e8 il tema principale di Il leone d'inverno?"
+         ],
+         "score": 0.44632361378533286
+      },
+      "Who is the author of the science fiction mystery-thriller novel called The Peripheral?": {
+         "translation": [
+            "Chi \u00e8 l'autore del romanzo mystery-thriller della fantascienza chiamato The Peripheral?"
+         ],
+         "targets": [
+            "Chi \u00e8 l'autore del romanzo di fantascienza-thriller intitolato Inverso?"
+         ],
+         "score": 0.3508439695638686
+      },
+      "How tall is Saint Sophia Cathedral in Kyiv?": {
+         "translation": [
+            "Quanto \u00e8 alta la cattedrale di San Sophia a Kiev?"
+         ],
+         "targets": [
+            "Quanto \u00e8 alta la cattedrale di Santa Sofia a Kiev?",
+            "Quanto \u00e8 alta la cattedrale di Santa Sofia di Kiev?"
+         ],
+         "score": 0.5814307369682193
+      },
+      "What is the setting of the Sweet Magnolias TV series?": {
+         "translation": [
+            "Qual \u00e8 lo scenario della serie TV Sweet Magnolias?"
+         ],
+         "targets": [
+            "Qual \u00e8 l'ambientazione della serie TV Il colore delle magnolie?"
+         ],
+         "score": 4.539377974371219e-78
+      },
+      "Are there any potential allergy risks associated with consuming egg whites?": {
+         "translation": [
+            "C'\u00e8 qualche potenziale rischio di allergia associato al consumo di uova bianca?"
+         ],
+         "targets": [
+            "Ci sono potenziali rischi di allergia associati al consumo di albumi?"
+         ],
+         "score": 3.9876353728947065e-78
+      },
+      "Who plays the lead role in Queen of the Damned?": {
+         "translation": [
+            "Chi gioca il ruolo principale nella regina dei Damned?"
+         ],
+         "targets": [
+            "chi \u00e8 il protagonista del film La regina dei dannati?",
+            "Chi interpreta il ruolo principale in La regina dei dannati?",
+            "Chi interpreta il ruolo principale nel film la regina dei dannati?"
+         ],
+         "score": 4.751072498959554e-78
+      },
+      "Which composer composed Symphony No. 9?": {
+         "translation": [
+            "Quale compositore ha composto la Sinfonia No. 9?"
+         ],
+         "targets": [
+            "Quale compositore ha composto la Sinfonia n. 9?",
+            "Quale compositore ha composto Sinfonia n. 9?",
+            "Chi ha composto Sinfonia n. 9?"
+         ],
+         "score": 0.7071067811865475
+      },
+      "Who designed Tokyo Tower?": {
+         "translation": [
+            "Chi ha progettato la Torre di Tokyo?"
+         ],
+         "targets": [
+            "Chi ha progettato la Torre di Tokyo?"
+         ],
+         "score": 1.0
+      },
+      "How tall is the Ostankino Tower in Moscow?": {
+         "translation": [
+            "Quanto alto \u00e8 la torre Ostankino a Mosca?"
+         ],
+         "targets": [
+            "Quanto \u00e8 alta la torre di Ostankino a Mosca?"
+         ],
+         "score": 5.389137965329953e-78
+      },
+      "Can you sing the chorus of the folk song Ring a Ring o' Roses?": {
+         "translation": [
+            "Puoi cantare il coro della canzone folk Ring a Ring o' Roses?"
+         ],
+         "targets": [
+            "Puoi cantare il ritornello della canzone popolare Girotondo?",
+            "Sai cantare il ritornello del girotondo, la canzone popolare?"
+         ],
+         "score": 3.9876353728947065e-78
+      },
+      "Who choreographed the original 1910 ballet of The Firebird?": {
+         "translation": [
+            "Chi ha coreografato il ballo originale del 1910 del Firebird?"
+         ],
+         "targets": [
+            "Chi ha coreografato il balletto originale del 1910 di L'uccello di fuoco?",
+            "Chi ha coreografato il balletto originale del 1910 L'uccello di fuoco?",
+            "Di chi era la coreografia originale del 1910 del balletto L'uccello di fuoco?"
+         ],
+         "score": 0.47538527325677404
+      },
+      "Name one famous scene from The Tragical History of Doctor Faustus?": {
+         "translation": [
+            "Chiamiamo una scena famosa della storia tragica del dottore Fausto?"
+         ],
+         "targets": [
+            "Nomina una scena famosa dalla tragica storia del Dottor Faust?",
+            "Nomina una scena famosa da La tragica storia del Dottor Faust?"
+         ],
+         "score": 4.38832006142665e-78
+      },
+      "How long was Mary of Burgundy married to Emperor Maximilian I?": {
+         "translation": [
+            "Per quanto tempo Maria di Burgundia era sposata all'imperatore Maximilian I?"
+         ],
+         "targets": [
+            "Per quanto tempo Maria di Borgogna \u00e8 stata sposata con l'imperatore Massimiliano I?",
+            "Per quanto tempo Maria di Borgogna \u00e8 stata sposata con l'imperatore Massimiliano I"
+         ],
+         "score": 0.31818770336963653
+      },
+      "In which industry does Seishiro Kato work?": {
+         "translation": [
+            "In quale settore lavora Seishiro Kato?"
+         ],
+         "targets": [
+            "In quale settore lavora Seishir\u014d Kat\u014d?",
+            "In quale settore lavora Seishiro Kato?"
+         ],
+         "score": 1.0
+      },
+      "How does neem oil benefit the body when consumed?": {
+         "translation": [
+            "Come beneficia l'olio di neem al corpo quando viene consumato?"
+         ],
+         "targets": [
+            "Che benefici porta l'olio di neem al corpo quando viene consumato?",
+            "In che modo l'olio di neem apporta benefici al corpo quando viene consumato?",
+            "In che modo l' olio di neem beneficia al corpo quando viene consumato?"
+         ],
+         "score": 0.7080735452207036
+      },
+      "When was the first episode of Stuck in the Middle aired?": {
+         "translation": [
+            "Quando \u00e8 stato trasmesso il primo episodio di Stuck in the Middle?"
+         ],
+         "targets": [
+            "Quando \u00e8 stato trasmesso il primo episodio di Harley in mezzo?"
+         ],
+         "score": 0.6315552371794037
+      },
+      "What is the symbol of the Galactic Empire in the Star Wars universe?": {
+         "translation": [
+            "Qual \u00e8 il simbolo dell'Impero Galattico nell'universo delle Guerre Stellare?"
+         ],
+         "targets": [
+            "Qual \u00e8 il simbolo dell'Impero Galattico nell'universo di Star Wars?",
+            "Qual \u00e8 il simbolo dell'Impero Galattico nell'universo di Guerre stellari?"
+         ],
+         "score": 0.6606328636027614
+      }
+   }
+}
