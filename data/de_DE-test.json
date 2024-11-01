@@ -1,0 +1,204 @@
+{
+   "average-bleu": 0.44621683349818675,
+   "report": {
+      "How tall is Saint Sophia Cathedral in Kyiv?": {
+         "translation": [
+            "Wie hoch ist die Kathedrale Saint Sophia in Kiew?"
+         ],
+         "targets": [
+            "Wie gro\u00df ist die Sophienkathedrale in Kiew?"
+         ],
+         "score": 9.106239987484608e-155
+      },
+      "How long was Mary of Burgundy married to Emperor Maximilian I?": {
+         "translation": [
+            "Wie lange war Maria von Burgund mit Kaiser Maximilian I. verheiratet?"
+         ],
+         "targets": [
+            "Wie lange war Maria von Burgund mit Kaiser Maximilian I. verheiratet?"
+         ],
+         "score": 1.0
+      },
+      "What is the genre of The War of the Worlds?": {
+         "translation": [
+            "Was ist das Genre des Krieges der Welten?"
+         ],
+         "targets": [
+            "Was ist das Genre von Der Krieg der Welten?",
+            "Welches Genre hat Der Krieg der Welten?"
+         ],
+         "score": 0.4111336169005197
+      },
+      "Where is Viktor Yushchenko from?": {
+         "translation": [
+            "Woher kommt Viktor Yuschenko?"
+         ],
+         "targets": [
+            "Woher kommt Wiktor Juschtschenko?"
+         ],
+         "score": 9.53091075863908e-155
+      },
+      "What was the original purpose of the Cathedral of Christ the Saviour?": {
+         "translation": [
+            "Was war der urspr\u00fcngliche Zweck der Kathedrale Christi der Erl\u00f6ser?"
+         ],
+         "targets": [
+            "Was war der urspr\u00fcngliche Zweck der Christ-Erl\u00f6ser-Kathedrale?"
+         ],
+         "score": 0.5169731539571706
+      },
+      "What is the genre of A City of Sadness?": {
+         "translation": [
+            "Was ist das Genre von A City of Sadness?"
+         ],
+         "targets": [
+            "Was ist das Genre des Films Eine Stadt der Traurigkeit?",
+            "Was ist das Genre von Eine Stadt der Traurigkeit?"
+         ],
+         "score": 0.44632361378533286
+      },
+      "How can Welsh onions be grown and harvested in home gardens?": {
+         "translation": [
+            "Wie k\u00f6nnen walisische Zwiebeln in heimischen G\u00e4rten angebaut und geerntet werden?"
+         ],
+         "targets": [
+            "Wie k\u00f6nnen Winterzwiebeln im heimischen Garten angebaut und geerntet werden?",
+            "Wie k\u00f6nnen Winterzwiebel in Hausg\u00e4rten angebaut und geerntet werden?"
+         ],
+         "score": 0.2998221389342337
+      },
+      "What type of entity is the Galactic Republic?": {
+         "translation": [
+            "Welche Art von Entit\u00e4t ist die Galaktische Republik?"
+         ],
+         "targets": [
+            "Was f\u00fcr ein Wesen ist die Galaktische Republik?",
+            "Welche Art von Einheit ist die Galaktische Republik?",
+            "Was f\u00fcr ein Gebilde ist die Galaktische Republik?"
+         ],
+         "score": 0.5
+      },
+      "Can baker's yeast be used in gluten-free baking?": {
+         "translation": [
+            "Kann Backhefe in glutenfreiem Backen verwendet werden?"
+         ],
+         "targets": [
+            "Kann Backhefe beim glutenfreien Backen verwendet werden?",
+            "Kann Backhefe zum glutenfreien Backen verwendet werden?"
+         ],
+         "score": 6.313993041533344e-78
+      },
+      "How does neem oil benefit the body when consumed?": {
+         "translation": [
+            "Wie kommt neem\u00f6l beim Verzehr zum Nutzen f\u00fcr den K\u00f6rper?"
+         ],
+         "targets": [
+            "Wie kommt Niem\u00f6l dem K\u00f6rper zugute, wenn es konsumiert wird?",
+            "Welchen Nutzen hat Niem\u00f6l beim Verzehr f\u00fcr den K\u00f6rper?",
+            "Wie tut Niem\u00f6l dem K\u00f6rper gut, wenn es konsumiert wird?"
+         ],
+         "score": 5.607773684948284e-78
+      },
+      "What type of artwork is Do Androids Dream of Electric Sheep??": {
+         "translation": [
+            "Welche Art von Kunstwerk ist Do Androids Dream of Electric Sheep??"
+         ],
+         "targets": [
+            "Welche Art von Kunstwerk ist Tr\u00e4umen Androiden von elektrischen Schafen??",
+            "Welche Art von Kunstwerk ist Tr\u00e4umen Androiden von elektrischen Schafen?",
+            "Welche Art von k\u00fcnstlerischen Stils ist Tr\u00e4umen Androiden von elektrischen Schafen gemacht?"
+         ],
+         "score": 0.3508439695638686
+      },
+      "Who are the main antagonistic forces in the World of Ice and Fire?": {
+         "translation": [
+            "Wer sind die wichtigsten antagonistischen Kr\u00e4fte in der Welt von Eis und Feuer?"
+         ],
+         "targets": [
+            "Wer sind die wichtigsten antagonistischen Kr\u00e4fte in der Welt von Eis und Feuer?"
+         ],
+         "score": 1.0
+      },
+      "What is the significance of the Basilica of Our Lady of Guadalupe in Mexican culture?": {
+         "translation": [
+            "Welche Bedeutung hat die Basilika Unserer Lieben Frau von Guadalupe in der mexikanischen Kultur?"
+         ],
+         "targets": [
+            "Welche Bedeutung hat die Basilika Unserer Lieben Frau von Guadalupe in der mexikanischen Kultur?"
+         ],
+         "score": 1.0
+      },
+      "Can Schr\u00f6dinger's cat exist in both live and dead states simultaneously?": {
+         "translation": [
+            "Kann Schr\u00f6dingers Katze in Leben und Tod gleichzeitig existieren?"
+         ],
+         "targets": [
+            "Kann Schr\u00f6dingers Katze gleichzeitig lebend und tot existieren?",
+            "Kann Schr\u00f6dingers Katze gleichzeitig lebendig und tot sein?"
+         ],
+         "score": 4.797597231912944e-78
+      },
+      "What is the symbol of the Galactic Empire in the Star Wars universe?": {
+         "translation": [
+            "Was ist das Symbol des Galaktischen Reiches im Universum der Sternenkriege?"
+         ],
+         "targets": [
+            "Was ist das Symbol des Galaktischen Imperiums im Star Wars-Universum?",
+            "Was ist das Symbol des Galaktischen Imperium im Star Wars-Universum?"
+         ],
+         "score": 0.47987820666906633
+      },
+      "Who were the main composers of medieval music?": {
+         "translation": [
+            "Wer waren die wichtigsten Komponisten der mittelalterlichen Musik?"
+         ],
+         "targets": [
+            "Wie hei\u00dfen die Hauptkomponisten der Musik des Mittelalters?",
+            "Wer waren die Hauptkomponisten der Musik des Mittelalters?"
+         ],
+         "score": 4.797597231912944e-78
+      },
+      "Who was Grand Duke Sergei Alexandrovich of Russia?": {
+         "translation": [
+            "Wer war Gro\u00dfherzog Sergei Alexandrowitsch von Russland?"
+         ],
+         "targets": [
+            "Wer war Gro\u00dff\u00fcrst Sergei Alexandrowitsch von Russland?",
+            "Wer war Sergei Alexandrowitsch Romanow?"
+         ],
+         "score": 0.488923022434901
+      },
+      "Who played the titular character in the film The Man in the Iron Mask?": {
+         "translation": [
+            "Wer spielte die Titelfigur im Film Der Mann in der Eisenmaske?"
+         ],
+         "targets": [
+            "Wer spielte die Titelfigur im Film Der Mann in der eisernen Maske?",
+            "Wer spielte die Titelfigur in Der Mann mit der eisernen Maske?"
+         ],
+         "score": 0.8931539818068694
+      },
+      "In which industry does Seishiro Kato work?": {
+         "translation": [
+            "In welcher Branche arbeitet Seishiro Kato?"
+         ],
+         "targets": [
+            "In welcher Branche arbeitet Seishir\u014d Kat\u014d?",
+            "In welcher Branche ist Seishiro Kato t\u00e4tig?",
+            "In welcher Branche arbeitet Seishiro Kato?"
+         ],
+         "score": 1.0
+      },
+      "Which religious denomination is Saint Catherine Monastery associated with?": {
+         "translation": [
+            "Mit welcher religi\u00f6sen Konfession ist das Kloster Saint Catherine verbunden?"
+         ],
+         "targets": [
+            "Welcher Konfession geh\u00f6rt das Katharinenkloster an?",
+            "Welcher religi\u00f6sen Konfession ist das Katharinenkloster assoziiert?",
+            "Mit welcher religi\u00f6sen Konfession ist das Katharinenkloster verbunden?"
+         ],
+         "score": 0.537284965911771
+      }
+   }
+}
