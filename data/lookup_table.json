@@ -1,0 +1,16 @@
+{
+    "lookup":
+    {
+        "en_EN": "en_XX",
+        "fr_FR": "fr_XX",
+        "ar_AE": "ar_AR",
+        "de_DE": "de_DE",
+        "es_ES": "es_XX",
+        "it_IT": "it_IT",
+        "ja_JP": "ja_XX",
+        "ko_KR": "ko_KR",
+        "th_TH": "th_TH",
+        "tr_TR": "tr_TR",
+        "zh_TW": "zh_CN"
+    }
+}
