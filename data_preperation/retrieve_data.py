@@ -13,9 +13,9 @@ def retrieve_data(lang, target = True, entity = True):
             entities.append(data['entities'])
     if not target and not entity:
         return sources
-    if not target:
+    elif not target:
         return sources, entities
-    if not entity:
+    elif not entity:
         return sources, targets
     else:
         return sources, targets, entities
