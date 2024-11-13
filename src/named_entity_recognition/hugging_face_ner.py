@@ -1,7 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-from src.data_util import retrieve_data
+from data_util import retrieve_data
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
 
