@@ -1,1 +1,0 @@
-from .t import do_thing
