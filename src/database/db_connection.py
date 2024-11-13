@@ -14,6 +14,7 @@ def command(query_string:str)->list[tuple]:
         A list of results
     NOTES
         Will literally let you do anything be careful
+        It opens and closes the SQL connection so you do not have to 
     """
     con = sql.connect(db_path)
     cur = con.cursor()
@@ -83,3 +84,20 @@ def query_by_instance(instance:str, projections='*', additional='')->list[tuple]
     ''')
     return res
 
+
+def query_by_id(ids:list, projections='*', additional='')->list[tuple]:
+    """Perform a query by passing in a list of wiki_ids
+    
+    ARGS
+        **ids** -- A list of wiki_ids to query for i.e ['Q49', 'Q1234']
+        **projections** -- A string of columns to project (default all)
+        **additional** -- Additional sql to pass into the request (default none)
+
+    RETURNS
+        A list of tuples representing the query results 
+    """
+    ids = [f'\"{x}\"' for x in ids] #annoying requirement to wrap the ids in quotes
+    q_string = f'''SELECT {projections} FROM entity_translation WHERE wiki_id IN ({", ".join(ids)}) {additional}'''
+    res = command(q_string)
+
+    return res

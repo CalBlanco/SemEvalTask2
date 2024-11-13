@@ -1,1 +1,1 @@
-from .db_connection import command, query, query_by_name, query_by_instance
+from .db_connection import query, query_by_name, query_by_instance, query_by_id
