@@ -4,14 +4,16 @@ from data_util import retrieve_data
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
 
-def ner_baseline(lang, num_samples = 100000, multi_lang = False):
-    """
-    Input:
-    lang: language of the data to be retrieved, if multi_lang is True, lang should be a list of languages
-    num_samples: number of samples to be processed from the first num_samples of the retrieved data
-    multi_lang: if True, the data is retrieved from multiple languages training data
+def ner_baseline(lang, num_samples = 100000, multi_lang = False)->list[tuple]:
+    """NER Baseline model from Huggingface
+
+    ARGS
+        **lang**        -- language of the data to be retrieved, if multi_lang is True, lang should be a list of languages
+        **num_samples** -- number of samples to be processed from the first num_samples of the retrieved data
+        **multi_lang**  --  if True, the data is retrieved from multiple languages training data
     
-    Returns a list of tuples, where each tuple contains a list of predicted entities and a list of true entity wikidata ids.
+    RETURNS
+        A list of tuples, where each tuple contains a list of predicted entities and a list of true entity wikidata ids.
     """
     sources = []
     entities = []

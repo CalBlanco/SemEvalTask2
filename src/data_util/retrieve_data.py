@@ -4,7 +4,14 @@ import os
 
 path = os.path.join(os.path.dirname(__file__), '../../data/train/')
 
-def retrieve_data(lang, target = True, entity = True):
+def retrieve_data(lang:str, target = True, entity = True)->tuple[list,list,list]:
+    """Retrieve data from a language
+    
+    ARGS:
+        lang   -- String of a desired language (look at data/train/ for language names)
+        target -- boolean flag for returning targets for a utterance
+        entity -- boolean flag to return entities for a utterance
+    """
     source_file = os.path.join(path, f'{lang}/train.jsonl')
     sources = []
     targets = []
