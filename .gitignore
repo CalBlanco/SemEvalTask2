@@ -5,3 +5,5 @@ Data.zip
 **/__pycache__/
 
 **/*.db-journal
+
+en_coNER_test.json
