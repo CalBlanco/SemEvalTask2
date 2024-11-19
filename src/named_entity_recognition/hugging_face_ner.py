@@ -1,5 +1,3 @@
-import sys
-import os
 from data_util import retrieve_data
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
@@ -26,8 +24,8 @@ def ner_baseline(lang, num_samples = 100000, multi_lang = False)->list[tuple]:
         sources, entities = retrieve_data(lang, target=False)
     data = list(zip(sources, entities))
 
-    tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
-    model = AutoModelForTokenClassification.from_pretrained("dslim/bert-base-NER")
+    tokenizer = AutoTokenizer.from_pretrained("dslim/bert-large-NER")
+    model = AutoModelForTokenClassification.from_pretrained("dslim/bert-large-NER")
 
     nlp = pipeline("ner", model=model, tokenizer=tokenizer)
     data_ner = []
@@ -51,8 +49,7 @@ def ner_baseline(lang, num_samples = 100000, multi_lang = False)->list[tuple]:
         clean_entities_found = []
         for entity in entities_found:
             if "#" not in source:
-                if "#" in entity:
-                    entity = entity.replace(" #", "")
+                entity = entity.replace(" #", "")
                 entity = entity.replace("#", "")
             clean_entities_found.append(entity)
 
@@ -63,4 +60,4 @@ def ner_baseline(lang, num_samples = 100000, multi_lang = False)->list[tuple]:
     return data_ner
 
 # example usage
-# print(ner_baseline(['ja', 'de'], 20, multi_lang=True))
+#print(ner_baseline(['ja', 'de'], 20, multi_lang=True))
