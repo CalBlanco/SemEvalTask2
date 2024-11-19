@@ -1,4 +1,8 @@
 import json
+import os
+
+
+path = os.path.join(os.path.dirname(__file__), '../../data/coNER_data/')
 
 def retrieve_coNER(file_path: str):
     """
@@ -25,7 +29,7 @@ def retrieve_coNER(file_path: str):
         return [], []
 
 # Example usage
-file_path = 'coNER_data/en_coNER_train.json'
+file_path = os.path.join(path, 'en_coNER_train.json')
 tokens, ner_tags = retrieve_coNER(file_path)
 
 print(f"Tokens: {tokens[:2]}")  # Print first 2 samples
