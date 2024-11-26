@@ -30,7 +30,7 @@ def retrieve_coNER(file: str):
         return [], []
 
 # Example usage
-tokens, ner_tags = retrieve_coNER("en_coNER_train.json")
+# tokens, ner_tags = retrieve_coNER("en_coNER_train.json")
 
-print(f"Tokens: {tokens[:2]}")  # Print first 2 samples
-print(f"NER Tags: {ner_tags[:2]}")
+# print(f"Tokens: {tokens[:2]}")  # Print first 2 samples
+# print(f"NER Tags: {ner_tags[:2]}")
