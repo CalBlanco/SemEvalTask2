@@ -1,1 +1,1 @@
-from .gru import gru_ner_model
+from .gru import GRUModel

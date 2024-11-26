@@ -1,3 +1,6 @@
+
+from collaters import Collator
+from datasets import TagingDataset
 import torch
 from torch import nn
 from torch.nn import GRU
@@ -14,273 +17,161 @@ import json
 import os
 
 
-path = os.path.join(os.path.dirname(__file__), '../../data/coNER_data/')
-
-def retrieve_coNER(file: str):
-    """
-    Retrieves tokens and target IOB ner_tags from coNER file
-    """
-
-    try:
-        file_path = os.path.join(path, file)
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-
-        tokens = [item['tokens'] for item in data]
-        ner_tags = [item['ner_tags'] for item in data]
-
-        return tokens, ner_tags
-    
-    except FileNotFoundError:
-        print(f"Error: File not found at {file_path}")
-        return [], []
-    except KeyError as e:
-        print(f"Error: Missing key in JSON data - {e}")
-        return [], []
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON format - {e}")
-        return [], []
-
-torch.manual_seed(57)
-
-source_train, target_train = retrieve_coNER("en_coNER_train.json")
-source_val, target_val = retrieve_coNER("en_coNER_validation.json")
-
-x = [source_train[i] for i in range(len(source_train))]
-x_split_train = []
-for i in range(len(x)):
-    x_split_train.append(x[i])
-y = [target_train[i] for i in range(len(target_train))]
-y_split_train = []
-for i in range(len(y)):
-    y_split_train.append(y[i])
-
-x_val = [source_val[i] for i in range(len(source_val))]
-x_split_valtest = []
-for i in range(len(x_val)):
-    x_split_valtest.append(x_val[i])
-y_val = [target_val[i] for i in range(len(target_val))]
-y_split_valtest = []
-for i in range(len(y_val)):
-    y_split_valtest.append(y_val[i])
-
-
-# train test split
-x_split_val, x_split_test, y_split_val, y_split_test = sklearn.model_selection.train_test_split(x_split_valtest, y_split_valtest, test_size=0.50, random_state=64)
-
-class TagingDataset(Dataset):
-    def __init__(self, x, y, token_vocab=None, tag_vocab=None, training=True):
-        # Create vocabularies if training
-        if training:
-            self.token_vocab = {'<PAD>': 0, '<UNK>': 1}
-            self.tag_vocab = {'<PAD>': 0}
-
-            # build vocab from training data
-            for i in range(len(x)):
-                for token in x[i]:
-                    if token not in self.token_vocab:
-                        self.token_vocab[token] = len(self.token_vocab)
-                for tag in y[i]:
-                    if tag not in self.tag_vocab:
-                        self.tag_vocab[tag] = len(self.tag_vocab)
-        else:
-            assert token_vocab is not None and tag_vocab is not None
-            self.token_vocab = token_vocab
-            self.tag_vocab = tag_vocab
-
-        # Convert sentences and tags to integer IDs during initialization
-        self.corpus_token_ids = []
-        self.corpus_tag_ids = []
-        for i in range(len(x)):
-            token_ids = [self.token_vocab.get(token, self.token_vocab['<UNK>']) for token in x[i]]
-            tag_ids = [self.tag_vocab[tag] for tag in y[i]]
-            self.corpus_token_ids.append(torch.tensor(token_ids))
-            self.corpus_tag_ids.append(torch.tensor(tag_ids))
-
-    def __len__(self):
-        return len(self.corpus_token_ids)
-
-    def __getitem__(self, idx):
-        return self.corpus_token_ids[idx], self.corpus_tag_ids[idx]
-
-# create datasets
-train_dataset = TagingDataset(x_split_train, y_split_train, training=True)
-val_dataset = TagingDataset(x_split_val, y_split_val, token_vocab=train_dataset.token_vocab, tag_vocab=train_dataset.tag_vocab, training=False)
-test_dataset = TagingDataset(x_split_test, y_split_test, token_vocab=train_dataset.token_vocab, tag_vocab=train_dataset.tag_vocab, training=False)
-
-
-
-# collate token_ids and tag_ids to make mini-batches
-def collate_fn(batch):
-    # batch: [(token_ids, tag_ids), (token_ids, tag_ids), ...]
-
-    # Separate sentences and tags
-    token_ids = [item[0] for item in batch]
-    tag_ids = [item[1] for item in batch]
-
-    # Pad sequences
-    sentences_padded = pad_sequence(token_ids, batch_first=True, padding_value=train_dataset.token_vocab['<PAD>'])
-    # sentences_pad.size()  (batch_size, seq_len)
-    tags_padded = pad_sequence(tag_ids, batch_first=True, padding_value=train_dataset.tag_vocab['<PAD>'])
-    # tags_pad.size()  (batch_size, seq_len)
-    return sentences_padded, tags_padded
 
 #model definition
 class GRUModel(nn.Module):
-    def __init__(self, vocab_size, tagset_size, embedding_dim, hidden_dim):
+    def __init__(self, token_vocab, tag_vocab, embedding_dim=512, hidden_dim=1024):
+        """ GRU Model for token tagging
+
+        **ARGS**
+            token_vocab: dictionary of tokens with their token id as a number [REQUIRED]
+            tag_vocab: dictionary of tags with their tag id as a number [REQUIRED]
+            embedding_dim: Int size for embedding dimension [DEFAULT=512]
+            hidden_dim: Int size for hidden dimenesion [DEFAULT=1024]
+
+        *Notes*:
+            Will automatically pick the following devices in this order if the devices are available
+            1. Cuda (gpu)
+            2. mps (apple sillicon/metal)
+            3. cpu
+        
+        **RETURNS**
+            An instance of the GRU Model with desired parameters
+        """
         super(GRUModel, self).__init__()
-        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=0)
+        self.token_vocab = token_vocab
+        self.tag_vocab = tag_vocab
+        self.device = torch.device('cuda') if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else torch.device('cpu') #try GPU, then MPS, then CPU if none are available
+
+        self.decode_tokens = {int(v):k for k,v in token_vocab.items()}
+        self.decode_tags = {int(v):k for k,v in tag_vocab.items()}
+
+
+        self.embedding = nn.Embedding(len(token_vocab), embedding_dim, padding_idx=0)
         self.gru = GRU(embedding_dim, hidden_dim, batch_first=True)
-        self.fc = nn.Linear(hidden_dim, tagset_size)
+        self.fc = nn.Linear(hidden_dim, len(tag_vocab))
 
     def forward(self, x):
         embeddings = self.embedding(x)
         out, _ = self.gru(embeddings)
         out = self.fc(out)
         return out
+    
 
+    def fit(self, train:DataLoader, val:DataLoader, epochs=30, learning_rate=0.0001):
+        """ Main training loop for the GRU Model
 
-EMBEDDING_DIM = 512
-HIDDEN_DIM = 1024
-BATCH_SIZE = 64
-LEARNING_RATE = 0.0001
-NUM_EPOCHS = 30 
-train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
-val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=collate_fn)
-test_loader = DataLoader(test_dataset, shuffle=False)
+        **ARGS**
+            train: DataLoader to pull training samples from [REQUIRED]
+            val: DataLoader to pull validation samples from [REQUIRED]
+            epochs: integer count for epoch number [DEFUALT=30]
+            learning_rate: float for learning rate steps [DEFAULT=0.0001]
 
-model = GRUModel(
-    vocab_size=len(train_dataset.token_vocab),
-    tagset_size=len(train_dataset.tag_vocab),
-    embedding_dim=EMBEDDING_DIM,
-    hidden_dim=HIDDEN_DIM
-)
+        """
+        
+        loss_fn = nn.CrossEntropyLoss(ignore_index=self.tag_vocab['<PAD>'])
+        optimizer = optim.Adam(self.parameters(), lr=learning_rate)
 
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+        model = self.to(self.device)
 
-loss_fn = nn.CrossEntropyLoss(ignore_index=train_dataset.tag_vocab['<PAD>'])
-optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
+        metrics = []
+        best_f1 = 0
+        best_val_loss = float('inf')
+        best_train_loss = float('inf')
+        # Training Loop
+        for epoch in range(epochs):
+            # Training
+            model.train()
+            total_train_loss = 0
+            for token_ids, tag_ids in train:
+                token_ids = token_ids.to(self.device)
+                tag_ids = tag_ids.to(self.device)
 
-model = model.to(device)
+                optimizer.zero_grad()
 
-metrics = []
-best_f1 = 0
-best_val_loss = float('inf')
-best_train_loss = float('inf')
-# Training Loop
-for epoch in range(NUM_EPOCHS):
-    # Training
-    model.train()
-    total_train_loss = 0
-    for token_ids, tag_ids in train_loader:
-        token_ids = token_ids.to(device)
-        tag_ids = tag_ids.to(device)
+                outputs = model(token_ids)  # (batch_size, seq_len, tagset_size)
 
-        optimizer.zero_grad()
+                loss = loss_fn(outputs.view(-1, outputs.shape[-1]), tag_ids.view(-1))
+                loss.backward()
+                optimizer.step()
 
-        outputs = model(token_ids)  # (batch_size, seq_len, tagset_size)
+                total_train_loss += loss.item()
 
-        loss = loss_fn(outputs.view(-1, outputs.shape[-1]), tag_ids.view(-1))
-        loss.backward()
-        optimizer.step()
+            # Validation
+            model.eval()
+            total_val_loss = 0
+            all_predictions = []
+            all_tags = []
 
-        total_train_loss += loss.item()
+            with torch.no_grad():
+                for token_ids, tag_ids in val:
+                    token_ids = token_ids.to(self.device)
+                    tag_ids = tag_ids.to(self.device)
 
-    # Validation
-    model.eval()
-    total_val_loss = 0
-    all_predictions = []
-    all_tags = []
+                    outputs = model(token_ids)  # (batch_size, seq_len, tagset_size)
 
-    with torch.no_grad():
-        for token_ids, tag_ids in val_loader:
-            token_ids = token_ids.to(device)
-            tag_ids = tag_ids.to(device)
+                    outputs = outputs.view(-1, outputs.shape[-1])
+                    tag_ids = tag_ids.view(-1)
+                    loss = loss_fn(outputs, tag_ids)
+                    total_val_loss += loss.item()
 
-            outputs = model(token_ids)  # (batch_size, seq_len, tagset_size)
+                    predictions = outputs.argmax(dim=1)
+                    mask = tag_ids != self.tag_vocab['<PAD>']
 
-            outputs = outputs.view(-1, outputs.shape[-1])
-            tag_ids = tag_ids.view(-1)
-            loss = loss_fn(outputs, tag_ids)
-            total_val_loss += loss.item()
+                    all_predictions.extend(predictions[mask].tolist())
+                    all_tags.extend(tag_ids[mask].tolist())
 
-            predictions = outputs.argmax(dim=1)
-            mask = tag_ids != train_dataset.tag_vocab['<PAD>']
+            # compute train and val loss
+            train_loss = total_train_loss / len(train)
+            val_loss = total_val_loss / len(val)
 
-            all_predictions.extend(predictions[mask].tolist())
-            all_tags.extend(tag_ids[mask].tolist())
+            # Calculate F1 score
+            f1 = f1_score(all_tags, all_predictions, average='macro')
+            metrics.append([epoch+1, train_loss, val_loss, f1])
+            if f1 > best_f1:
+                best_f1 = f1
+                if val_loss < best_val_loss:
+                    best_val_loss = val_loss
+                    if train_loss < best_train_loss:
+                        torch.save(model.state_dict(), "best_model.pt")
+                        best_train_loss = train_loss
+            print(f'epoch = {epoch+1} | train_loss = {train_loss:.3f} | val_loss = {val_loss:.3f} | f1 = {f1:.3f}')
 
-    # compute train and val loss
-    train_loss = total_train_loss / len(train_loader)
-    val_loss = total_val_loss / len(val_loader)
+    def predict(self, test:DataLoader)->list[tuple[list[int], list[int]]]:
+        """ Given a DataLoader to get inputs from output a list of predictions
 
-    # Calculate F1 score
-    f1 = f1_score(all_tags, all_predictions, average='macro')
-    metrics.append([epoch+1, train_loss, val_loss, f1])
-    if f1 > best_f1:
-        best_f1 = f1
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            if train_loss < best_train_loss:
-                torch.save(model.state_dict(), "best_model.pt")
-                best_train_loss = train_loss
-    print(f'epoch = {epoch+1} | train_loss = {train_loss:.3f} | val_loss = {val_loss:.3f} | f1 = {f1:.3f}')
-"""
-# plot training metrics
-line_chart = plt.figure()
-x_axis = [x[0] for x in metrics]
-y_axis = [x[1] for x in metrics]
-y_axis2 = [x[2] for x in metrics]
-y_axis3 = [x[3] for x in metrics]
-plt.plot(x_axis, y_axis, label="Training Loss", color="blue", linestyle="-.")
-plt.plot(x_axis, y_axis2, label="Validation Loss", color="orange", linestyle="-.")
-plt.plot(x_axis, y_axis3, label="F1 Score", color="green", linestyle="-")
-plt.xlabel("Epoch")
-plt.ylabel("Loss/F1 Score")
-plt.legend()
-plt.title("Training Metrics")
-plt.savefig("training_metrics.png")
-"""
-best_model = GRUModel(
-    vocab_size=len(train_dataset.token_vocab),
-    tagset_size=len(train_dataset.tag_vocab),
-    embedding_dim=EMBEDDING_DIM,
-    hidden_dim=HIDDEN_DIM
-)
+            **RETURNS**
+                A list of tuples of the form [ ([token_0, token_1, ... token_n], [tag_0, tag_1, ... tag_n]), ... ]
+        """
+        all_predictions = []
+        self.eval()
+        with torch.no_grad():
+            for token_ids, _ in test:
+                token_ids = token_ids.to(self.device)
+                outputs = self(token_ids) # (batch_size, seq_len, tagset_size)
+                predictions = outputs.argmax(dim=-1)  # Get predictions for each token
+                for i, predict in enumerate(predictions):
+                    all_predictions.append((token_ids[i].tolist(), predict.tolist()))
+               # all_predictions.append(predictions.view(-1).tolist())
+        return all_predictions
+    
+    def decode(self, predicitions:list[tuple[list[int], list[int]]])->list[tuple[list[str], list[str]]]:
+        """ Given an input predicition of the shape [ ([token_0, token_1, ... token_n], [tag_0, tag_1, ... tag_n]), ... ] decode the 
+            tokens and the tags based on our models decoding tables.
 
-best_model.load_state_dict(torch.load("best_model.pt", weights_only=True))
+            *notes*:
+                Will remove padding tokens and output the sequences without pads.
 
-# Input testing data to create predictions
-def Predict(model):
-    all_predictions = []
-    model.eval()
-    with torch.no_grad():
-        for token_ids, _ in test_loader:
-            token_ids = token_ids.to(device)
-            outputs = model(token_ids) # (batch_size, seq_len, tagset_size)
-            predictions = outputs.argmax(dim=-1)  # Get predictions for each token
-            all_predictions.extend(predictions.view(-1).tolist())
-    return all_predictions
+            **RETURNS**:
+                a list of decoded predictions in the form [ ([decoded_token_0, decoded_token_1, ... decoded_token_n], [decoded_tag_0, decoded_tag_1, ... decoded_tag_n])]
 
-predictions = Predict(best_model)
+        """
+        decoded = []
+        for tokens, tags in predicitions:
+            decoded_tokens = [self.decode_tokens[x] for x in tokens if x!=self.token_vocab['<PAD>']]
+            decoded_tags = [self.decode_tags[x] for x in tags if x!=self.tag_vocab['<PAD>']]
 
-# Convert numeric predictions back to tags
-for tag_ids in train_dataset.tag_vocab:
-    for i in range(len(predictions)):
-        if predictions[i] == train_dataset.tag_vocab[tag_ids]:
-            predictions[i] = tag_ids
+            decoded.append((decoded_tokens, decoded_tags))
 
-# Calculate lengths of each test sequence
-x_split_test_sizes = [len(seq) for seq in x_split_test]
+        return decoded
 
-# Split predictions according to original sequence lengths
-predictions_split = []
-for i in range(len(x_split_test)):
-    predictions_split.append(predictions[sum(x_split_test_sizes[:i]):sum(x_split_test_sizes[:i+1])])
-
-output = []
-for i in range(len(predictions_split)):
-    output.append([i+1," ".join(predictions_split[i])])
-
-for_csv = pd.DataFrame(output, columns = ["ID", "IOB Slot tags"])
-for_csv.to_csv("gru_predictions.csv", index = False)
