@@ -48,6 +48,6 @@ def iob_to_entities(dataframe)->list[list[tuple[str, str]]]:
     return data_entities
 
 # example usage
-test = [(["I", "really", "like", "the", "Hangover"], ["O", "O", "O", "B_Movie", "I_Movie"]), (["Quinton", "Tarantino", "is", "a", "great", "director"], ["B_Person", "I_Person", "O", "O", "O", "O"])]
+#test = [(["I", "really", "like", "the", "Hangover"], ["O", "O", "O", "B_Movie", "I_Movie"]), (["Quinton", "Tarantino", "is", "a", "great", "director"], ["B_Person", "I_Person", "O", "O", "O", "O"])]
 #testdataframe = pd.DataFrame(test, columns=["Sentence", "IOB Slot tags"])
-print(iob_to_entities(test))
+#print(iob_to_entities(test))
