@@ -46,27 +46,9 @@ torch.manual_seed(57)
 source_train, target_train = retrieve_coNER("en_coNER_train.json")
 source_val, target_val = retrieve_coNER("en_coNER_validation.json")
 
-x = [source_train[i] for i in range(len(source_train))]
-x_split_train = []
-for i in range(len(x)):
-    x_split_train.append(x[i])
-y = [target_train[i] for i in range(len(target_train))]
-y_split_train = []
-for i in range(len(y)):
-    y_split_train.append(y[i])
-
-x_val = [source_val[i] for i in range(len(source_val))]
-x_split_valtest = []
-for i in range(len(x_val)):
-    x_split_valtest.append(x_val[i])
-y_val = [target_val[i] for i in range(len(target_val))]
-y_split_valtest = []
-for i in range(len(y_val)):
-    y_split_valtest.append(y_val[i])
-
 
 # train test split
-x_split_val, x_split_test, y_split_val, y_split_test = sklearn.model_selection.train_test_split(x_split_valtest, y_split_valtest, test_size=0.50, random_state=64)
+x_split_val, x_split_test, y_split_val, y_split_test = sklearn.model_selection.train_test_split(source_val, target_val, test_size=0.50, random_state=64)
 
 class TagingDataset(Dataset):
     def __init__(self, x, y, token_vocab=None, tag_vocab=None, training=True):
@@ -104,7 +86,7 @@ class TagingDataset(Dataset):
         return self.corpus_token_ids[idx], self.corpus_tag_ids[idx]
 
 # create datasets
-train_dataset = TagingDataset(x_split_train, y_split_train, training=True)
+train_dataset = TagingDataset(source_train, target_train, training=True)
 val_dataset = TagingDataset(x_split_val, y_split_val, token_vocab=train_dataset.token_vocab, tag_vocab=train_dataset.tag_vocab, training=False)
 test_dataset = TagingDataset(x_split_test, y_split_test, token_vocab=train_dataset.token_vocab, tag_vocab=train_dataset.tag_vocab, training=False)
 
@@ -249,6 +231,8 @@ best_model = GRUModel(
 )
 
 best_model.load_state_dict(torch.load("best_model.pt", weights_only=True))
+
+best_model = best_model.to(device)
 
 # Input testing data to create predictions
 def Predict(model):
