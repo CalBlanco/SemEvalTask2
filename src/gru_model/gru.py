@@ -17,7 +17,6 @@ import json
 import os
 
 
-
 #model definition
 class GRUModel(nn.Module):
     def __init__(self, token_vocab, tag_vocab, embedding_dim=512, hidden_dim=1024):
