@@ -60,4 +60,4 @@ def ner_baseline(lang, num_samples = 100000, multi_lang = False)->list[tuple]:
     return data_ner
 
 # example usage
-#print(ner_baseline(['ja', 'de'], 20, multi_lang=True))
+# print(ner_baseline(['ja', 'de'], 20, multi_lang=True))

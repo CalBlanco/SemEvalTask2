@@ -4,12 +4,13 @@ import os
 
 path = os.path.join(os.path.dirname(__file__), '../../data/coNER_data/')
 
-def retrieve_coNER(file_path: str):
+def retrieve_coNER(file: str):
     """
     Retrieves tokens and target IOB ner_tags from coNER file
     """
 
     try:
+        file_path = os.path.join(path, file)
         with open(file_path, 'r') as f:
             data = json.load(f)
 
@@ -29,8 +30,7 @@ def retrieve_coNER(file_path: str):
         return [], []
 
 # Example usage
-file_path = os.path.join(path, 'en_coNER_train.json')
-tokens, ner_tags = retrieve_coNER(file_path)
+tokens, ner_tags = retrieve_coNER("en_coNER_train.json")
 
 print(f"Tokens: {tokens[:2]}")  # Print first 2 samples
 print(f"NER Tags: {ner_tags[:2]}")
