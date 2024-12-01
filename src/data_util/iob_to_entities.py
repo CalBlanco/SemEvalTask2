@@ -27,22 +27,25 @@ def iob_to_entities(dataframe)->list[list[tuple[str, str]]]:
     else:
         raise ValueError("dataframe must be a pandas dataframe or list of tuples")
     
+    
     data = list(zip(sources, targets))
     
     data_entities = []
     for source, tags in data:
         entities_found = []
         named_entity = ""
-        for i in range(len(tags)):
+        tag_type = ""
+        for i in range(len(source)):
             tag = tags[i]
             if tag[0] == 'B':
-                named_entity += source[i] + " "
+                named_entity += str(source[i]) + " "
                 tag_type = tag[2:]
             elif tag[0] == 'I':
-                named_entity += source[i] + " "
+                named_entity += str(source[i]) + " "
             elif tag[0] == 'O' and named_entity != "":
                 entities_found.append((named_entity[:-1], tag_type))
                 named_entity = ""
+                tag_type = ""
         if named_entity != "":
             entities_found.append((named_entity[:-1], tag_type))
 

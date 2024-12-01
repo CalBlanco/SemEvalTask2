@@ -173,4 +173,13 @@ class GRUModel(nn.Module):
             decoded.append((decoded_tokens, decoded_tags))
 
         return decoded
+    
+    def load_model(self, path:str):
+        """ Load a pre-trained model from a given path
+
+        **ARGS**
+            path: string path to the pre-trained model
+        """
+        self.to(self.device)
+        self.load_state_dict(torch.load(path, weights_only=True))
 

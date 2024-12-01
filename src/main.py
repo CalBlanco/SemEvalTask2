@@ -5,7 +5,7 @@ from datasets import TagingDataset
 from gru_model import GRUModel
 from torch.utils.data import DataLoader
 from collaters import Collator
-from data_util import retrieve_coNER
+from data_util import retrieve_coNER, iob_to_entities, ner_accuracy
 from sklearn.model_selection import train_test_split
 
 BATCH_SIZE = 64
@@ -18,7 +18,6 @@ x_val, x_test, y_val, y_test = train_test_split(x_val,y_val, test_size=0.5, rand
 train_dataset = TagingDataset(x_train,y_train, training=True)
 val_dataset = TagingDataset(x_val, y_val, token_vocab=train_dataset.token_vocab, tag_vocab=train_dataset.tag_vocab, training=False)
 test_dataset = TagingDataset(x_test, y_test, token_vocab=train_dataset.token_vocab, tag_vocab=train_dataset.tag_vocab, training=False)
-
 
 collater = Collator(train_dataset.token_vocab, train_dataset.tag_vocab)
 
@@ -34,6 +33,15 @@ out = gru.predict(test_loader)
 
 decode = gru.decode(out)
 
-print(decode[0])
+gru_test = GRUModel(train_dataset.token_vocab, train_dataset.tag_vocab)
+gru_test.load_model("best_model.pt")
 
+out_test = gru_test.predict(test_loader)
+
+decode_test = gru_test.decode(out_test)
+
+pred_entities = iob_to_entities(decode_test)
+true_entities = iob_to_entities(list(zip(x_test, y_test)))
+
+print(ner_accuracy(pred_entities, true_entities))
 
