@@ -1,7 +1,7 @@
 import sqlite3 as sql
 import os
 
-db_path = os.path.join(os.path.dirname(__file__), '../../database/entities.db')
+db_path = os.path.join(os.path.dirname(__file__), '../../database/ent.db')
 
 
 def command(query_string:str)->list[tuple]:
