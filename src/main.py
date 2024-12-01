@@ -3,6 +3,7 @@ from named_entity_recognition import ner_baseline
 from database import query_by_name, query_by_instance, query_by_id
 from datasets import TagingDataset
 from gru_model import GRUModel
+from transformer_ner import TransformerNER
 from torch.utils.data import DataLoader
 from collaters import Collator
 from data_util import retrieve_coNER, iob_to_entities, ner_accuracy
@@ -25,7 +26,7 @@ train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, co
 val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=collater.collate_fn)
 test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=collater.collate_fn)
 
-gru = GRUModel(train_dataset.token_vocab, train_dataset.tag_vocab)
+gru = TransformerNER(train_dataset.token_vocab, train_dataset.tag_vocab)
 
 gru.fit(train_loader, val_loader, epochs=1)
 
