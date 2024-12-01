@@ -5,8 +5,11 @@ import pandas as pd
 def iob_to_entities(dataframe)->list[list[tuple[str, str]]]:
     """Convert IOB format to entities
     
-    ARGS:
-        dataframe -- pandas dataframe or list of tuples with sentences and IOB formated tags
+    **ARGS**
+    dataframe: pandas dataframe or list of tuples with sentences and IOB formated tags
+    
+    **RETURNS**
+    data_entities: list of a list of tuples with the entity and the type of entity
     """
     sources = []
     targets = []
