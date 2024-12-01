@@ -17,6 +17,8 @@ Activate the venv by typing `source ./abc/bin/activate` on mac (honestly not sur
 
 Install required packages via `pip install -r requirements.txt`
 
+### Acknowledgements
 
+The evaluation script for this project was created using the template provided by Apple for the SemEval Task 2. The template can be found [here](https://github.com/apple/ml-xc-translate/tree/main/evaluation).
 
 
