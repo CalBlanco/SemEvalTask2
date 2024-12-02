@@ -154,7 +154,7 @@ class GRUModel(nn.Module):
                # all_predictions.append(predictions.view(-1).tolist())
         return all_predictions
     
-    def decode(self, predicitions:list[tuple[list[int], list[int]]])->list[tuple[list[str], list[str]]]:
+    def decode(self, predicitions:list[tuple[list[int], list[int]]], target_sentences:list[list[str]])->list[tuple[list[str], list[str]]]:
         """ Given an input predicition of the shape [ ([token_0, token_1, ... token_n], [tag_0, tag_1, ... tag_n]), ... ] decode the 
             tokens and the tags based on our models decoding tables.
 
@@ -166,8 +166,15 @@ class GRUModel(nn.Module):
 
         """
         decoded = []
-        for tokens, tags in predicitions:
-            decoded_tokens = [self.decode_tokens[x] for x in tokens if x!=self.token_vocab['<PAD>']]
+        for i, (tokens, tags) in enumerate(predicitions):
+            decoded_tokens = []
+            for j, x in enumerate(tokens):
+                if x != self.token_vocab['<PAD>']:
+                    if x != self.token_vocab['<UNK>']:
+                        decoded_tokens.append(self.decode_tokens[x])
+                    else:
+                        decoded_tokens.append(target_sentences[i][j])
+                
             decoded_tags = [self.decode_tags[x] for x in tags if x!=self.tag_vocab['<PAD>']]
 
             decoded.append((decoded_tokens, decoded_tags))
