@@ -23,35 +23,33 @@ def ner_baseline(file_path: str, num_samples = 100000)->list[tuple]:
     count = 0
     for source, ner_tags in data:
         source = " ".join(source)
+        print(source)
         ner_results = nlp(source)
         entities_found = []
-        entity_found = ""
-        tags_found = []
-        last_entity = False
-        for entity_info in ner_results:
-            if entity_info['entity'].startswith('B-'):
-                entity_found += entity_info['word']
-                tags_found.append(entity_info['entity'][2:])
-                last_entity = True
-            elif entity_info['entity'].startswith('I-'):
-                entity_found += " " + entity_info['word']
-                last_entity = True
-            elif entity_info['entity'].startswith('O'):
-                if last_entity == True:
-                    entities_found.append(entity_found)
-                    last_entity = False
-                    entity_found = ""
+        first_entity = True
+        named_entity = ""
+        for data in ner_results:
+            print(data)
+            if data['entity'][0] == 'B':
+                if first_entity == False:
+                    entities_found.append((named_entity[:-1], tag))
+                    named_entity = ""
+                tag = data['entity'][2:]
+                first_entity = False
+            named_entity += data['word']
+            named_entity += " "
+        entities_found.append((named_entity[:-1], data['entity'][2:]))
 
 
         # Remove # from entities which the model puts there for some reason
         clean_entities_found = []
-        for entity in entities_found:
+        for entity, tag in entities_found:
             if "#" not in source:
                 entity = entity.replace(" #", "")
                 entity = entity.replace("#", "")
-            clean_entities_found.append(entity)
+            clean_entities_found.append((entity, tag))
 
-        data_ner.append((clean_entities_found, tags_found)) # append predicted entities and true entity wikidata ids
+        data_ner.append((clean_entities_found)) # append predicted entities
         count += 1
         if count == num_samples:
             break

@@ -74,9 +74,6 @@ class GRUModel(nn.Module):
         model = self.to(self.device)
 
         metrics = []
-        best_f1 = 0
-        best_val_loss = float('inf')
-        best_train_loss = float('inf')
         # Training Loop
         for epoch in range(epochs):
             # Training
@@ -127,14 +124,21 @@ class GRUModel(nn.Module):
             # Calculate F1 score
             f1 = f1_score(all_tags, all_predictions, average='macro')
             metrics.append([epoch+1, train_loss, val_loss, f1])
-            if f1 > best_f1:
-                best_f1 = f1
-                if val_loss < best_val_loss:
-                    best_val_loss = val_loss
-                    if train_loss < best_train_loss:
-                        torch.save(model.state_dict(), "best_model.pt")
-                        best_train_loss = train_loss
+            torch.save(model.state_dict(), f"gru_ner_{epoch+1}.pt")
             print(f'epoch = {epoch+1} | train_loss = {train_loss:.3f} | val_loss = {val_loss:.3f} | f1 = {f1:.3f}')
+        # After training loop
+        train_losses = [m[1] for m in metrics]
+        val_losses = [m[2] for m in metrics]
+        epochs = range(1, epochs + 1)
+
+        plt.figure(figsize=(20, 10))
+        plt.plot(epochs, train_losses, label='Train Loss', color='blue')
+        plt.plot(epochs, val_losses, label='Val Loss', color='red')
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.legend()
+        plt.savefig('gru_loss_plot.png')
+        plt.close()
 
     def predict(self, test:DataLoader)->list[tuple[list[int], list[int]]]:
         """ Given a DataLoader to get inputs from output a list of predictions
