@@ -1,4 +1,4 @@
-from data_util import retrieve_data
+from data_util import retrieve_data, translate_entities
 from named_entity_recognition import ner_baseline
 from database import query_by_name, query_by_instance, query_by_id
 from datasets import TagingDataset
@@ -10,6 +10,10 @@ from data_util import retrieve_coNER, iob_to_entities, ner_accuracy, class_accur
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 import numpy as np
+
+#Uncomment this block to train GRU
+""" 
+
 BATCH_SIZE = 64
 
 x_train, y_train = retrieve_coNER("en_coNER_train.json")
@@ -27,6 +31,9 @@ train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, co
 val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=collater.collate_fn)
 test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=collater.collate_fn)
 
+
+
+# Transformer Model
 #transformer = TransformerNER(train_dataset.token_vocab, train_dataset.tag_vocab)
 
 #transformer.fit(train_loader, val_loader, epochs=30)
@@ -100,3 +107,34 @@ for acc in accuracy_results:
 for acc in class_accuracy_results:
     print(acc)
 
+
+# GRU model
+gru = GRUModel(train_dataset.token_vocab, train_dataset.tag_vocab)
+
+gru.fit(train_loader, val_loader, epochs=1)
+
+out = gru.predict(test_loader)
+
+decode = gru.decode(out)
+
+gru_test = GRUModel(train_dataset.token_vocab, train_dataset.tag_vocab)
+gru_test.load_model("best_model.pt")
+
+out_test = gru_test.predict(test_loader)
+
+decode_test = gru_test.decode(out_test)
+
+pred_entities = iob_to_entities(decode_test)
+true_entities = iob_to_entities(list(zip(x_test, y_test)))
+
+print(ner_accuracy(pred_entities, true_entities)) """
+
+
+
+#Uncomment this block to see translate_entities in action
+""" 
+example = [[('North America', 'Thing'), ('John', 'Person')],[('North America', 'Thing')]]
+
+ents = translate_entities(example)
+print(ents) 
+"""
