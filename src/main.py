@@ -1,4 +1,4 @@
-from data_util import retrieve_data
+from data_util import retrieve_data, translate_entities
 from named_entity_recognition import ner_baseline
 from database import query_by_name, query_by_instance, query_by_id
 from datasets import TagingDataset
@@ -7,6 +7,9 @@ from torch.utils.data import DataLoader
 from collaters import Collator
 from data_util import retrieve_coNER, iob_to_entities, ner_accuracy
 from sklearn.model_selection import train_test_split
+
+#Uncomment this block to train GRU
+""" 
 
 BATCH_SIZE = 64
 
@@ -43,5 +46,14 @@ decode_test = gru_test.decode(out_test)
 pred_entities = iob_to_entities(decode_test)
 true_entities = iob_to_entities(list(zip(x_test, y_test)))
 
-print(ner_accuracy(pred_entities, true_entities))
+print(ner_accuracy(pred_entities, true_entities)) """
 
+
+
+#Uncomment this block to see translate_entities in action
+""" 
+example = [[('North America', 'Thing'), ('John', 'Person')],[('North America', 'Thing')]]
+
+ents = translate_entities(example)
+print(ents) 
+"""
