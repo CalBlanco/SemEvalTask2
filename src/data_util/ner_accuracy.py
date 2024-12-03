@@ -17,6 +17,7 @@ def ner_accuracy(predictions, targets) -> float:
     correct = 0
     incorrect = 0
     sentence_count = 0
+    data = []
     for sentence in predictions:
         entity_count = 0
         if sentence == []:
@@ -36,7 +37,7 @@ def ner_accuracy(predictions, targets) -> float:
                     else:
                         incorrect += 1
             else:
-                print(entity, targets[sentence_count][entity_count])
+                data.append((entity, targets[sentence_count][entity_count]))
                 if fuzz.ratio(entity[0], targets[sentence_count][entity_count][0]) > 80:
                     correct += 1
                 else:
@@ -46,7 +47,7 @@ def ner_accuracy(predictions, targets) -> float:
     print(f"Correct: {correct}, Incorrect: {incorrect}")
     accuracy = correct/(correct+incorrect)
     print(f"Accuracy: {accuracy}")
-    return accuracy
+    return accuracy, data
 
 # example usage
 # print(ner_accuracy(test_predictions, test_targets))
@@ -92,7 +93,6 @@ def class_accuracy(predictions, targets) -> float:
                             entity_types[f"{entity[1]}_incorrect"] = entity_types.get(f"{entity[1]}_incorrect", 0) + 1
                         incorrect += 1
             else:
-                print(entity, targets[sentence_count][entity_count])
                 if fuzz.ratio(entity[1], targets[sentence_count][entity_count][1]) > 80:
                     entity_types[f"{entity[1]}_correct"] = entity_types.get(f"{entity[1]}_correct", 0) + 1
                     correct += 1
