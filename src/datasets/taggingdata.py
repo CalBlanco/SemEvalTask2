@@ -19,7 +19,7 @@ class TagingDataset(Dataset):
         # Create vocabularies if training
         if training:
             self.token_vocab = {'<PAD>': 0, '<UNK>': 1}
-            self.tag_vocab = {'<PAD>': 0}
+            self.tag_vocab = {'<PAD>': 0, '<UNK>': 1}
 
             # build vocab from training data
             for i in range(len(x)):
@@ -39,7 +39,7 @@ class TagingDataset(Dataset):
         self.corpus_tag_ids = []
         for i in range(len(x)):
             token_ids = [self.token_vocab.get(token, self.token_vocab['<UNK>']) for token in x[i]]
-            tag_ids = [self.tag_vocab[tag] for tag in y[i]]
+            tag_ids = [self.tag_vocab.get(tag, self.tag_vocab['<UNK>']) for tag in y[i]]
             self.corpus_token_ids.append(torch.tensor(token_ids))
             self.corpus_tag_ids.append(torch.tensor(tag_ids))
 
