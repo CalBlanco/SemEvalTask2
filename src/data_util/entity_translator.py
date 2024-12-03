@@ -11,8 +11,11 @@ def translate_entity(entity_name:str, desired_translations:list[str]):
         a tuple containing the translations in the order specified by desired_translations 
     """
     q = query_by_name(entity_name, ','.join(desired_translations))
-    
-    return q[0]
+    if len(q) > 0:
+        return q[0]
+    else:
+        return []
+   
 
 def translate_entities(results:list[list[tuple[str,str]]], desired_translations:list[str]=['ar', 'de', 'es', 'fr', 'it', 'ja']):
     """ Translate the outputs from the NER accuracies into desired translation languages

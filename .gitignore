@@ -9,3 +9,5 @@ Data.zip
 coNER_data/en_coNER_test.json
 coNER_data/en_coNER_test_full.json
 ignore/**
+
+test_results/**
