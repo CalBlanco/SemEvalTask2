@@ -101,3 +101,18 @@ def query_by_id(ids:list, projections='*', additional='')->list[tuple]:
     res = command(q_string)
 
     return res
+
+def query_by_alias(alias:str, projections=['name']):
+    """Query the alias table by an alias to produce the original name (the one found in our entity_translation table)
+
+    Args:
+        - alias(str): The alias we want to search for
+        - projections(list): The projections from the table (only options are name, and alias) [Default = ['name']]
+
+    Returns:
+        Returns the name of the entity with the specified alias or an empty list
+    """
+    q_string = f'''SELECT {",".join(projections)} FROM alias_table WHERE alias LIKE "{alias}"'''
+    res = command(q_string)
+
+    return res
