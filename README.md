@@ -22,3 +22,10 @@ Install required packages via `pip install -r requirements.txt`
 The evaluation script for this project was created using the template provided by Apple for the SemEval Task 2. The template can be found [here](https://github.com/apple/ml-xc-translate/tree/main/evaluation).
 
 
+## Usage
+
+In order to get started with this repository ensure you are on python version `3.11` and create a virtual environment. Install dependencies from our `requirements.txt` file.
+
+### Code base
+A majority of our codebase can be found in the `src` folder where we implemented a lot of our models and datasets. However some of the code for implementing the pipelines can be found in the `notebooks` folder.
+
