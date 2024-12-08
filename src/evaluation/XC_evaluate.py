@@ -38,6 +38,7 @@ import json
 import re
 import sys
 from typing import Dict, List, Set
+from nltk.translate.bleu_score import sentence_bleu
 
 from loguru import logger
 
@@ -140,6 +141,7 @@ def compute_entity_name_translation_accuracy(
     predictions: Dict[str, str],
     mentions: Dict[str, Set[str]],
     verbose: bool = False,
+    comparison_type: str = "mta",
 ) -> dict:
     """
     Compute the entity name translation accuracy.
@@ -155,48 +157,75 @@ def compute_entity_name_translation_accuracy(
             - total: Total number of instances.
             - accuracy: Accuracy of the model.
     """
-    correct, total = 0, 0
+    if comparison_type == "mta":
+        correct, total = 0, 0
 
-    for instance_id, instance_mentions in mentions.items():
-        # Check that there is at least one entity mention for the instance.
-        assert instance_mentions, f"No mentions for instance {instance_id}"
+        for instance_id, instance_mentions in mentions.items():
+            # Check that there is at least one entity mention for the instance.
+            assert instance_mentions, f"No mentions for instance {instance_id}"
 
-        # Increment the total count of instances (for recall calculation).
-        total += 1
+            # Increment the total count of instances (for recall calculation).
+            total += 1
 
-        # Check that there is a prediction for the instance.
-        if instance_id not in predictions:
-            if verbose:
-                logger.warning(
-                    f"No prediction for instance {instance_id}. Check that this is expected behavior, as it may affect the evaluation."
-                )
-            continue
+            # Check that there is a prediction for the instance.
+            if instance_id not in predictions:
+                if verbose:
+                    logger.warning(
+                        f"No prediction for instance {instance_id}. Check that this is expected behavior, as it may affect the evaluation."
+                    )
+                continue
 
-        prediction = predictions[instance_id]
-        normalized_translation = prediction.casefold()
-        entity_match = False
+            prediction = predictions[instance_id]
+            normalized_translation = prediction.casefold()
+            entity_match = False
 
-        for mention in instance_mentions:
-            normalized_mention = mention.casefold()
+            for mention in instance_mentions:
+                normalized_mention = mention.casefold()
 
-            # Check if the normalized mention is a substring of the normalized translation.
-            # If it is, consider the prediction (the entity name translation) correct.
-            if normalized_mention in normalized_translation:
-                correct += 1
-                entity_match = True
-                break
+                # Check if the normalized mention is a substring of the normalized translation.
+                # If it is, consider the prediction (the entity name translation) correct.
+                if normalized_mention in normalized_translation:
+                    correct += 1
+                    entity_match = True
+                    break
 
-        # Log the prediction and the ground truth mentions for every wrong match if verbose is set.
-        if not entity_match and verbose:
-            logger.info(f"Prediction: {prediction}")
-            logger.info(f"Ground truth mentions: {instance_mentions}")
-            logger.info("")
+            # Log the prediction and the ground truth mentions for every wrong match if verbose is set.
+            if not entity_match and verbose:
+                logger.info(f"Prediction: {prediction}")
+                logger.info(f"Ground truth mentions: {instance_mentions}")
+                logger.info("")
 
-    return {
-        "correct": correct,
-        "total": total,
-        "accuracy": correct / total if total > 0 else 0.0,
-    }
+        return {
+            "correct": correct,
+            "total": total,
+            "accuracy": correct / total if total > 0 else 0.0,
+        }
+    elif comparison_type == "bleu":
+        cumulative_bleu_score = 0.0
+        total = 0
+        for instance_id, instance_sentence in mentions.items():
+            # Check that there is a prediction for the instance.
+            if instance_id not in predictions:
+                if verbose:
+                    logger.warning(
+                        f"No prediction for instance {instance_id}. Check that this is expected behavior, as it may affect the evaluation."
+                    )
+                continue
+
+            prediction = predictions[instance_id]
+            normalized_translation = prediction.casefold()
+            bleu_score = sentence_bleu(instance_sentence, normalized_translation)
+            total += 1
+            cumulative_bleu_score += bleu_score
+        
+        if total == 0:
+            return {
+                "average_bleu_score": 0.0,
+            }
+        else:
+            return {
+                "average_bleu_score": cumulative_bleu_score / total,
+        }
 
 
 def get_mentions_from_references(data: List[dict]) -> Dict[str, Set[str]]:
@@ -222,6 +251,30 @@ def get_mentions_from_references(data: List[dict]) -> Dict[str, Set[str]]:
         mentions[instance_id] = instance_mentions
 
     return mentions
+
+def get_sentence_from_references(data: List[dict]) -> Dict[str, Set[str]]:
+    """
+    Load the ground truth sentence from the data.
+
+    Args:
+        data (List[dict]): List of dictionaries, one for each instance in the dataset.
+
+    Returns:
+        Dict[str, Set[str]]: Dictionary with the instance ID as key and the set of entity sentences as value.
+    """
+    sentences = {}
+
+    for instance in data:
+        instance_id = instance["id"]
+        instance_sentences = set()
+
+        for target in instance["targets"]:
+            sentence = target["translation"]
+            instance_sentences.add(sentence)
+
+        sentences[instance_id] = instance_sentences
+
+    return sentences
 
 
 if __name__ == "__main__":
@@ -266,6 +319,7 @@ if __name__ == "__main__":
     logger.info(f"Loading data from {args.references}...")
     reference_data = load_references(args.references, args.entity_types)
     mentions = get_mentions_from_references(reference_data)
+    sentences = get_sentence_from_references(reference_data)
     assert len(mentions) == len(reference_data)
     logger.info(f"Loaded {len(reference_data)} instances.")
 
@@ -274,15 +328,21 @@ if __name__ == "__main__":
     logger.info(f"Loaded {len(prediction_data)} predictions.")
 
     logger.info("Computing entity name translation accuracy...")
+
+    # you can swap the "sentences" and "mentions" arguments as well as "mta" and "bleu" arguments to evaluate whole sentences or
+    # just mentions as well as using mta or bleu to compare accuracy
     entity_name_translation_accuracy = compute_entity_name_translation_accuracy(
         prediction_data,
-        mentions,
+        sentences,
         args.verbose,
+        comparison_type="bleu",
     )
 
     logger.info("")
     logger.info("=============================================")
     logger.info("Evaluation results:")
+    logger.info(f"Average BLEU score = {entity_name_translation_accuracy['average_bleu_score']:.2f}")
+    """
     logger.info(f"Correct instances   = {entity_name_translation_accuracy['correct']}")
     logger.info(f"Total instances     = {entity_name_translation_accuracy['total']}")
 
@@ -291,5 +351,5 @@ if __name__ == "__main__":
     logger.info(f"m-ETA               = {accuracy:.2f}")
     logger.info("=============================================")
     logger.info("")
-
+"""
     logger.info("Evaluation completed.")

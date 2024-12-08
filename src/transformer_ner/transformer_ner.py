@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 from gensim.downloader import load
-
+import matplotlib.pyplot as plt
 #model definition
 class TransformerNER(nn.Module):
     def __init__(self, token_vocab, tag_vocab, embedding_dim=512, hidden_dim=1024, dropout=0.3):
